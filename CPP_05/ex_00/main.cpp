@@ -1,6 +1,13 @@
 #include "Bureaucrat.hpp"
 
 int	main( void ) {
-	std::cout << "Creating a bureaucrat with grade 150" << std::endl;
-	return (1);
+	try 
+	{
+		int name = 100;
+		throw (name);
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 }

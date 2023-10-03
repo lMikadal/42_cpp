@@ -4,8 +4,13 @@ Bureaucrat::Bureaucrat (void) : _name("default"), _grade(150) {
 	std::cout << "Bureaucrat default constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat (const Bureaucrat &b) : _name(b._name), _grade(b._grade) {
+Bureaucrat::Bureaucrat (const Bureaucrat &b): _name(b.getName()) {
+	*this = b;
 	std::cout << "Bureaucrat copy constructor called" << std::endl;
+}
+
+Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name), _grade(grade) {
+	std::cout << "Bureaucrat constructor called" << std::endl;
 }
 
 Bureaucrat::~Bureaucrat (void) {
@@ -13,8 +18,20 @@ Bureaucrat::~Bureaucrat (void) {
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &b) {
-	if (this == &b)
-		return (*this);
-	_grade = b._grade;
+	if (this != &b) {
+		this->_grade = b.getGrade();
+	}
 	return (*this);
+}
+
+std::string	Bureaucrat::getName (void) const {
+	return (this->_name);
+}
+
+int	Bureaucrat::getGrade (void) const {
+	return (this->_grade);
+}
+
+void	Bureaucrat::setGrade (const int grade) {
+	this->_grade = grade;
 }

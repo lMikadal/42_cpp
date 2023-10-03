@@ -11,8 +11,14 @@ class Bureaucrat {
 	public:
 		Bureaucrat ();
 		Bureaucrat (const Bureaucrat &b);
+		Bureaucrat (const std::string name, int grade);
 		~Bureaucrat ();
 		Bureaucrat& operator=(const Bureaucrat &b);
+
+		std::string	getName (void) const;
+		int	getGrade (void) const;
+
+		void	setGrade (const int grade);
 };
 
 #endif
