@@ -9,16 +9,16 @@ class Bureaucrat {
 		int 				_grade;
 
 	public:
-		Bureaucrat ();
-		Bureaucrat (const Bureaucrat &b);
-		Bureaucrat (const std::string name, int grade);
-		~Bureaucrat ();
+		Bureaucrat();
+		Bureaucrat(const Bureaucrat &b);
+		Bureaucrat(const std::string &name, const int &grade);
+		~Bureaucrat();
 		Bureaucrat& operator=(const Bureaucrat &b);
 
-		std::string	getName (void) const;
-		int	getGrade (void) const;
+		int			getGrade(void) const;
+		std::string	getName(void) const;
 
-		void	setGrade (const int grade);
+		void		setGrade(const int &grade);
 };
 
 #endif
