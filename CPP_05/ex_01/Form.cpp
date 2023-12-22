@@ -51,11 +51,11 @@ void	Form::beSigned(const int &grade) {
 }
 
 const char* Form::GradeTooHighException::what() const throw() {
-	return ("Form grade too high");
+	return ("Grade too high");
 }
 
 const char* Form::GradeTooLowException::what() const throw() {
-	return ("Form grade too low");
+	return ("Grade too low");
 }
 
 std::ostream&	operator<<(std::ostream &out, const Form &f) {
