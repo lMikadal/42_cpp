@@ -31,7 +31,7 @@ class Bureaucrat {
 				virtual const char* what() const throw();
 		};
 
-		void		signForm(class Form &f) const;
+		void		signForm(class AForm &f) const;
 };
 
 std::ostream&	operator<<(std::ostream &out, const Bureaucrat &b);
