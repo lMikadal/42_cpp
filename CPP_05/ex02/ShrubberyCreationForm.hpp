@@ -8,10 +8,10 @@ class ShrubberyCreationForm : public AForm {
 		ShrubberyCreationForm();
 
 	public:
-		ShrubberyCreationForm(const ShrubberyCreationForm &b);
+		ShrubberyCreationForm(const ShrubberyCreationForm &rhs);
 		ShrubberyCreationForm(const std::string &target);
 		~ShrubberyCreationForm();
-		ShrubberyCreationForm& operator=(const ShrubberyCreationForm &b);
+		ShrubberyCreationForm& operator=(const ShrubberyCreationForm &rhs);
 
 		void 		action() const;
 };

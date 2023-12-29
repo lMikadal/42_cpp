@@ -4,7 +4,7 @@ RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45
 	std::cout << "RobotomyRequestForm default constructor called" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &b) : AForm(b.getName(), b.getGradeToSign(), b.getGradeToExecute(), b.getTarget()) {
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &rhs) : AForm(rhs.getName(), rhs.getGradeToSign(), rhs.getGradeToExecute(), rhs.getTarget()) {
 	std::cout << "RobotomyRequestForm copy constructor called" << std::endl;
 }
 
@@ -16,9 +16,9 @@ RobotomyRequestForm::~RobotomyRequestForm() {
 	std::cout << "RobotomyRequestForm destructor called" << std::endl;
 }
 
-RobotomyRequestForm&	RobotomyRequestForm::operator=(const RobotomyRequestForm &b) {
-	if (this != &b)
-		this->setSigned(b.getSigned());
+RobotomyRequestForm&	RobotomyRequestForm::operator=(const RobotomyRequestForm &rhs) {
+	if (this != &rhs)
+		this->setSigned(rhs.getSigned());
 
 	return (*this);
 }

@@ -4,7 +4,7 @@ ShrubberyCreationForm::ShrubberyCreationForm() : AForm("default", 145, 137) {
 	std::cout << "ShrubberyCreationForm default constructor called" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &b) : AForm(b.getName(), b.getGradeToSign(), b.getGradeToExecute(), b.getTarget()) {
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &rhs) : AForm(rhs.getName(), rhs.getGradeToSign(), rhs.getGradeToExecute(), rhs.getTarget()) {
 	std::cout << "ShrubberyCreationForm copy constructor called" << std::endl;
 }
 
@@ -16,9 +16,9 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 	std::cout << "ShrubberyCreationForm destructor called" << std::endl;
 }
 
-ShrubberyCreationForm&	ShrubberyCreationForm::operator=(const ShrubberyCreationForm &b) {
-	if (this != &b)
-		this->setSigned(b.getSigned());
+ShrubberyCreationForm&	ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs) {
+	if (this != &rhs)
+		this->setSigned(rhs.getSigned());
 
 	return (*this);
 }

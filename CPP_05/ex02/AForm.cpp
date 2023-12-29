@@ -5,7 +5,7 @@ AForm::AForm() : _name("default"), _signed(false), _gradeToSign(150), _gradeToEx
 	std::cout << "AForm default constructor called" << std::endl;
 }
 
-AForm::AForm(const AForm &b) : _name(b.getName()), _signed(b.getSigned()), _gradeToSign(b.getGradeToSign()), _gradeToExecute(b.getGradeToExecute()), _target(b.getTarget()) {
+AForm::AForm(const AForm &rhs) : _name(rhs.getName()), _signed(rhs.getSigned()), _gradeToSign(rhs.getGradeToSign()), _gradeToExecute(rhs.getGradeToExecute()), _target(rhs.getTarget()) {
 	std::cout << "AForm copy constructor called" << std::endl;
 }
 
@@ -29,9 +29,9 @@ AForm::~AForm() {
 	std::cout << "AForm destructor called" << std::endl;
 }
 
-AForm&	AForm::operator=(const AForm &b) {
-	if(this != &b)
-		this->_signed = b.getSigned();
+AForm&	AForm::operator=(const AForm &rhs) {
+	if(this != &rhs)
+		this->_signed = rhs.getSigned();
 
 	return (*this);
 }
@@ -56,8 +56,8 @@ std::string AForm::getTarget() const {
 	return (this->_target);
 }
 
-void AForm::setSigned(const bool &b) {
-	this->_signed = b;
+void AForm::setSigned(const bool &sign) {
+	this->_signed = sign;
 }
 
 const char* AForm::GradeTooHighException::what() const throw() {
