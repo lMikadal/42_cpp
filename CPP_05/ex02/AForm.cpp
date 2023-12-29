@@ -1,15 +1,23 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
-AForm::AForm() : _name("default"), _signed(false), _gradeToSign(150), _gradeToExecute(150) {
+AForm::AForm() : _name("default"), _signed(false), _gradeToSign(150), _gradeToExecute(150), _target("default") {
 	std::cout << "AForm default constructor called" << std::endl;
 }
 
-AForm::AForm(const AForm &b) : _name(b.getName()), _signed(b.getSigned()), _gradeToSign(b.getGradeToSign()), _gradeToExecute(b.getGradeToExecute()) {
+AForm::AForm(const AForm &b) : _name(b.getName()), _signed(b.getSigned()), _gradeToSign(b.getGradeToSign()), _gradeToExecute(b.getGradeToExecute()), _target(b.getTarget()) {
 	std::cout << "AForm copy constructor called" << std::endl;
 }
 
-AForm::AForm(const std::string &name, const int &gradeToSign, const int &gradeToExecute) : _name(name), _signed(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
+AForm::AForm(const std::string &name, const int &gradeToSign, const int &gradeToExecute) : _name(name), _signed(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute), _target("default") {
+	if (gradeToSign < 1 || gradeToExecute < 1)
+		throw AForm::GradeTooHighException();
+	else if (gradeToSign > 150 || gradeToExecute > 150)
+		throw AForm::GradeTooLowException();
+	std::cout << "AForm constructor called" << std::endl;
+}
+
+AForm::AForm(const std::string &name, const int &gradeToSign, const int &gradeToExecute, const std::string &target) : _name(name), _signed(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute), _target(target) {
 	if (gradeToSign < 1 || gradeToExecute < 1)
 		throw AForm::GradeTooHighException();
 	else if (gradeToSign > 150 || gradeToExecute > 150)
@@ -42,6 +50,10 @@ int	AForm::getGradeToSign() const {
 
 int	AForm::getGradeToExecute() const {
 	return (this->_gradeToExecute);
+}
+
+std::string AForm::getTarget() const {
+	return (this->_target);
 }
 
 void AForm::setSigned(const bool &b) {

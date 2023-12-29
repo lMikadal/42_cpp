@@ -12,11 +12,13 @@ class AForm {
 		bool				_signed;
 		const int			_gradeToSign;
 		const int			_gradeToExecute;
+		const std::string	_target;
 
 	public:
 		AForm();
 		AForm(const AForm &b);
 		AForm(const std::string &name, const int &gradeToSign, const int &gradeToExecute);
+		AForm(const std::string &name, const int &gradeToSign, const int &gradeToExecute, const std::string &target);
 		~AForm();
 		AForm& operator=(const AForm &b);
 
@@ -24,6 +26,7 @@ class AForm {
 		bool		getSigned() const;
 		int			getGradeToSign() const;
 		int			getGradeToExecute() const;
+		std::string	getTarget() const;
 		void		setSigned(const bool &b);
 
 		class GradeTooHighException : public std::exception {
