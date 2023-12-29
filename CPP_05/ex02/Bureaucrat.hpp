@@ -4,6 +4,8 @@
 # include <iostream>
 # include <exception>
 
+class AForm;
+
 class Bureaucrat {
 	private:
 		const std::string	_name;
@@ -31,7 +33,8 @@ class Bureaucrat {
 				virtual const char* what() const throw();
 		};
 
-		void		signForm(class AForm &f) const;
+		void		signForm(AForm &f) const;
+		void		executeForm(const AForm &form) const;
 };
 
 std::ostream&	operator<<(std::ostream &out, const Bureaucrat &b);

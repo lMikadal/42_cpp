@@ -3,6 +3,8 @@
 
 # include <iostream>
 
+class Bureaucrat;
+
 class AForm {
 	private:
 		const std::string	_name;
@@ -32,7 +34,13 @@ class AForm {
 				virtual const char* what() const throw();
 		};
 
+		class FormNotSignedException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+
 		void		beSigned(const int &grade);
+		void		execute(const Bureaucrat &grade) const;
 };
 
 std::ostream& operator<<(std::ostream &out, const AForm &b);

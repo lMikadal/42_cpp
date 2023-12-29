@@ -1,4 +1,5 @@
 #include "AForm.hpp"
+#include "Bureaucrat.hpp"
 
 AForm::AForm() : _name("default"), _signed(false), _gradeToSign(150), _gradeToExecute(150) {
 	std::cout << "AForm default constructor called" << std::endl;
@@ -51,6 +52,10 @@ const char* AForm::GradeTooLowException::what() const throw() {
 	return ("Grade too low");
 }
 
+const char* AForm::FormNotSignedException::what() const throw() {
+	return ("Form not signed");
+}
+
 std::ostream& operator<<(std::ostream &out, const AForm &f) {
 	out << f.getName() << ", form grade to sign " << f.getGradeToSign() << ", form grade to execute " << f.getGradeToExecute() << ", signed " << f.getSigned() << std::endl;
 	return (out);
@@ -61,4 +66,13 @@ void	AForm::beSigned(const int &grade) {
 		throw AForm::GradeTooLowException();
 	else
 		this->_signed = true;
+}
+
+void AForm::execute(const Bureaucrat &executor) const {
+	if (executor.getGrade() > this->_gradeToExecute)
+		throw AForm::GradeTooLowException();
+	else if (!this->_signed)
+		throw AForm::FormNotSignedException();
+	else
+		std::cout << "AForm action" << std::endl;
 }
