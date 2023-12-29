@@ -1,17 +1,18 @@
 #include "Bureaucrat.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 
 int	main(void) {
-	Bureaucrat	bob("Bob", 1);
+	Intern	someRandomIntern;
+	AForm*	rrf;
+	Bureaucrat	b("Bender", 149);
 
-	ShrubberyCreationForm	formS("test_S");
-	bob.signForm(formS);
-	bob.executeForm(formS);
+	rrf = someRandomIntern.makeForm("", "Bender");
 
-	RobotomyRequestForm	formR("test_R");
-	bob.signForm(formR);
-	bob.executeForm(formR);
+	if (rrf) {
+		b.signForm(*rrf);
+		b.executeForm(*rrf);
+		delete rrf;
+	}
 
 	return (0);
 }
