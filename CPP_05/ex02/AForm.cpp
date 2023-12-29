@@ -44,6 +44,10 @@ int	AForm::getGradeToExecute() const {
 	return (this->_gradeToExecute);
 }
 
+void AForm::setSigned(const bool &b) {
+	this->_signed = b;
+}
+
 const char* AForm::GradeTooHighException::what() const throw() {
 	return ("Grade too high");
 }
@@ -74,5 +78,5 @@ void AForm::execute(const Bureaucrat &executor) const {
 	else if (!this->_signed)
 		throw AForm::FormNotSignedException();
 	else
-		std::cout << "AForm action" << std::endl;
+		this->action();
 }

@@ -10,7 +10,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &b): _name(b.getName()) {
 	std::cout << "Bureaucrat copy constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const std::string &name, const int &grade) {
+Bureaucrat::Bureaucrat(const std::string &name, const int &grade) : _name(name), _grade(grade) {
 	if (grade < 1)
 		throw Bureaucrat::GradeTooHighException();
 	else if (grade > 150)

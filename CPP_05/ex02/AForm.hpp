@@ -2,6 +2,7 @@
 # define AFORM_HPP
 
 # include <iostream>
+# include <fstream>
 
 class Bureaucrat;
 
@@ -23,6 +24,7 @@ class AForm {
 		bool		getSigned() const;
 		int			getGradeToSign() const;
 		int			getGradeToExecute() const;
+		void		setSigned(const bool &b);
 
 		class GradeTooHighException : public std::exception {
 			public:
@@ -39,8 +41,9 @@ class AForm {
 				virtual const char* what() const throw();
 		};
 
-		void		beSigned(const int &grade);
-		void		execute(const Bureaucrat &grade) const;
+		void				beSigned(const int &grade);
+		void				execute(const Bureaucrat &grade) const;
+		virtual void		action() const = 0;
 };
 
 std::ostream& operator<<(std::ostream &out, const AForm &b);
