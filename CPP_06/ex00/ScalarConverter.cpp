@@ -23,5 +23,16 @@ ScalarConverter &ScalarConverter::operator=(ScalarConverter const &rhs)
 
 void ScalarConverter::convert(char const *str)
 {
-	std::cout << "convert called with " << str << std::endl;
+	std::string s(str);
+	std::cout << "char: " << s << std::endl;
+}
+
+const char* ScalarConverter::NonDisplayableException::what() const throw()
+{
+	return ("Non displayable");
+}
+
+const char* ScalarConverter::ImpossibleException::what() const throw()
+{
+	return ("impossible");
 }
