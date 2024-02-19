@@ -8,6 +8,7 @@
 
 class ScalarConverter
 {
+
 	public:
 		ScalarConverter();
 		ScalarConverter(ScalarConverter const &rhs);
