@@ -21,16 +21,13 @@ ScalarConverter &ScalarConverter::operator=(ScalarConverter const &rhs)
 	return *this = rhs;
 }
 
-void convertToChar(char const *str, double const convD)
+void convertToChar(double const con_d)
 {
-	(void)str;
-	(void)convD;
+	(void)con_d;
 	std::cout << "char: ";
 	try
 	{
 		throw ScalarConverter::ImpossibleException();
-		throw ScalarConverter::NonDisplayableException();
-		std::cout << str << std::endl;
 	}
 	catch (ScalarConverter::NonDisplayableException &e)
 	{
@@ -42,32 +39,52 @@ void convertToChar(char const *str, double const convD)
 	}
 }
 
-void convertToInt(char const *str, double const convD)
+void convertToInt(double const con_d)
 {
-	(void)str;
-	std::cout << "int: " << convD << std::endl;
+	std::cout << "int: " << con_d << std::endl;
 }
 
-void convertToFloat(char const *str, const double convD)
+void convertToFloat(const double con_d)
 {
-	(void)str;
-	std::cout << "float: " << convD << "f" << std::endl;
+	std::cout << "float: " << con_d << "f" << std::endl;
 }
 
-void convertToDouble(char const *str, const double convD)
+void convertToDouble(const double con_d)
 {
-	(void)str;
-	std::cout << "double: " << convD << std::endl;
+	std::cout << "double: " << con_d << std::endl;
 }
 
 void ScalarConverter::convert(char const *str)
 {
-	double convD = std::atof(str);
+	std::string s(str);
+	if (s != "-inff" && s != "+inff" && s != "nanf" && s != "-inf" && s != "+inf" && s != "nan")
+	{
+		// check string before covert
+		int chk_dot = 0;
+		for (size_t i = 0; str[i] != '\0'; i++)
+		{
+			if ((i == 0 && (str[i] == '-' || str[i] == '+')) || str[i] == '.' || (str[i] == 'f' && str[i + 1] == '\0'))
+			{
+				if (str[i] == '.')
+					chk_dot++;
+				continue;
+			}
+			if (!std::isdigit(str[i]) || chk_dot > 1)
+			{
+				std::cout << "char: impossible" << std::endl;
+				std::cout << "int: impossible" << std::endl;
+				std::cout << "float: impossible" << std::endl;
+				std::cout << "double: impossible" << std::endl;
+				return;
+			}
+		}
+	}
+	double con_d = std::atof(str);
 
-	convertToChar(str, convD);
-	convertToInt(str, convD);
-	convertToFloat(str, convD);
-	convertToDouble(str, convD);
+	convertToChar(con_d);
+	convertToInt(con_d);
+	convertToFloat(con_d);
+	convertToDouble(con_d);
 }
 
 const char *ScalarConverter::NonDisplayableException::what() const throw()
