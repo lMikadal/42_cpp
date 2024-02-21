@@ -1,31 +1,35 @@
 #ifndef SCALARCONVERTER_HPP
-# define SCALARCONVERTER_HPP
+#define SCALARCONVERTER_HPP
 
-# include <iostream>
-# include <cstdio>
-# include <string>
-# include <cstdlib>
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include <cstdlib>
+#include <climits>
+#include <cfloat>
 
 class ScalarConverter
 {
 
+public:
+	ScalarConverter();
+	ScalarConverter(ScalarConverter const &rhs);
+	~ScalarConverter();
+	ScalarConverter &operator=(ScalarConverter const &rhs);
+
+	static void convert(char const *str);
+
+	class NonDisplayableException : public std::exception
+	{
 	public:
-		ScalarConverter();
-		ScalarConverter(ScalarConverter const &rhs);
-		~ScalarConverter();
-		ScalarConverter &operator=(ScalarConverter const &rhs);
+		virtual const char *what() const throw();
+	};
 
-		static void convert(char const *str);
-
-		class NonDisplayableException : public std::exception {
-			public:
-				virtual const char* what() const throw();
-		};
-
-		class ImpossibleException : public std::exception {
-			public:
-				virtual const char* what() const throw();
-		};
+	class ImpossibleException : public std::exception
+	{
+	public:
+		virtual const char *what() const throw();
+	};
 };
 
 #endif
