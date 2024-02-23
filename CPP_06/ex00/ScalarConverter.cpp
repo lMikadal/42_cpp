@@ -18,7 +18,8 @@ ScalarConverter::~ScalarConverter()
 
 ScalarConverter &ScalarConverter::operator=(ScalarConverter const &rhs)
 {
-	return *this = rhs;
+	(void)rhs;
+	return *this;
 }
 
 void chkNanInf(std::string s)
@@ -82,58 +83,35 @@ void convertToFloat(const double con_d, std::string s)
 {
 	std::string n_s = chkNanInfForInt(s);
 	std::cout << "float: ";
-	try
+
+	if (n_s.length() > 0)
 	{
-		if (n_s.length() > 0)
-		{
-			std::cout << n_s << "f" << std::endl;
-			return;
-		}
-		if (con_d > FLT_MAX)
-		{
-			std::cout << "+inff" << std::endl;
-			return;
-		}
-		if (con_d < FLT_MIN)
-		{
-			std::cout << "-inff" << std::endl;
-			return;
-		}
-		std::cout << con_d << "f" << std::endl;
+		std::cout << n_s << "f" << std::endl;
+		return;
 	}
-	catch (ScalarConverter::ImpossibleException &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
+	float f = static_cast<float>(con_d);
+	int i = static_cast<int>(con_d);
+	if (f == i)
+		std::cout << i << ".0f" << std::endl;
+	else
+		std::cout << static_cast<float>(con_d) << "f" << std::endl;
 }
 
 void convertToDouble(const double con_d, std::string s)
 {
 	std::string n_s = chkNanInfForInt(s);
 	std::cout << "double: ";
-	try
+
+	if (n_s.length() > 0)
 	{
-		if (n_s.length() > 0)
-		{
-			std::cout << n_s << std::endl;
-			return;
-		}
-		if (con_d > DBL_MAX)
-		{
-			std::cout << "+inf" << std::endl;
-			return;
-		}
-		if (con_d < DBL_MIN)
-		{
-			std::cout << "-inf" << std::endl;
-			return;
-		}
+		std::cout << n_s << std::endl;
+		return;
+	}
+	int i = static_cast<int>(con_d);
+	if (con_d == i)
+		std::cout << con_d << ".0" << std::endl;
+	else
 		std::cout << con_d << std::endl;
-	}
-	catch (ScalarConverter::ImpossibleException &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
 }
 
 void ScalarConverter::convert(char const *str)
@@ -155,8 +133,8 @@ void ScalarConverter::convert(char const *str)
 			{
 				std::cout << "char: impossible" << std::endl;
 				std::cout << "int: impossible" << std::endl;
-				std::cout << "float: nanf" << std::endl;
-				std::cout << "double: nan" << std::endl;
+				std::cout << "float: impossible" << std::endl;
+				std::cout << "double: impossible" << std::endl;
 				return;
 			}
 		}

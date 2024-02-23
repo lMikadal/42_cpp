@@ -18,7 +18,8 @@ Serializer::~Serializer()
 
 Serializer &Serializer::operator=(Serializer const &rhs)
 {
-	return *this = rhs;
+	(void)rhs;
+	return *this;
 }
 
 uintptr_t Serializer::serialize(Data *ptr)
