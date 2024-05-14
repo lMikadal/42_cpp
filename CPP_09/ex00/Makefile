@@ -1,4 +1,4 @@
-NAME	= BitcoinExchange
+NAME	= btc
 CPP		= c++
 FLAGS	= -Wall -Wextra -Werror -std=c++98
 
