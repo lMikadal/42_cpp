@@ -2,6 +2,8 @@
 #define BITCOINEXCHANGE_HPP
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <map>
 
 class BitcoinExchange
@@ -13,14 +15,15 @@ private:
 
 public:
 	BitcoinExchange();
-	BitcoinExchange(const BitcoinExchange &);
 	BitcoinExchange(std::string const &);
+	BitcoinExchange(const BitcoinExchange &);
 	~BitcoinExchange();
 	BitcoinExchange &operator=(const BitcoinExchange &);
 
 	std::string getFileData(void) const;
 	std::string getFileInput(void) const;
 	void setInput(std::string const &input);
+	void readFileData(void);
 
 	class InputFileCouldNotOpenException : public std::exception
 	{
