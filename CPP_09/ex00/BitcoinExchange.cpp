@@ -57,7 +57,7 @@ void BitcoinExchange::readFileData(void)
 			throw BitcoinExchange::DataFileErrorException();
 
 		key = line.substr(0, line.find(','));
-		if (key != "date" && !this->chkFmtKey(key))
+		if (key != "date" && !this->chkFmtDate(key))
 			throw BitcoinExchange::DataFileErrorException();
 
 		std::stringstream ss(line.substr(line.find(',') + 1));
@@ -68,7 +68,7 @@ void BitcoinExchange::readFileData(void)
 	file.close();
 }
 
-bool BitcoinExchange::chkFmtKey(std::string const &key) const
+bool BitcoinExchange::chkFmtDate(std::string const &key) const
 {
 	std::stringstream ss(key);
 	std::string token;
