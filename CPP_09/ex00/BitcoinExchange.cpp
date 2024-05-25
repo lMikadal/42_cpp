@@ -2,12 +2,12 @@
 
 BitcoinExchange::BitcoinExchange() : _data("data.csv")
 {
-	this->readFileData();
+	this->setFileData();
 }
 
 BitcoinExchange::BitcoinExchange(std::string const &name) : _data(name)
 {
-	this->readFileData();
+	this->setFileData();
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &b) : _data(b._data), _input(b._input), _dataMap(b._dataMap) {}
@@ -41,7 +41,7 @@ void BitcoinExchange::setInput(std::string const &input)
 	this->_input = input;
 }
 
-void BitcoinExchange::readFileData(void)
+void BitcoinExchange::setFileData(void)
 {
 	std::ifstream file(this->_data.c_str());
 	std::string line;

@@ -23,7 +23,7 @@ public:
 	std::string getFileData(void) const;
 	std::string getFileInput(void) const;
 	void setInput(std::string const &input);
-	void readFileData(void);
+	void setFileData(void);
 	bool chkFmtDate(std::string const &key) const;
 
 	class InputFileCouldNotOpenException : public std::exception
