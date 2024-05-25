@@ -24,6 +24,7 @@ public:
 	std::string getFileInput(void) const;
 	void setInput(std::string const &input);
 	void readFileData(void);
+	bool chkFmtKey(std::string const &key) const;
 
 	class InputFileCouldNotOpenException : public std::exception
 	{
