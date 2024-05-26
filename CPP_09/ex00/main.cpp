@@ -9,9 +9,7 @@ int main(int argc, char **argv)
 
 		BitcoinExchange exchange("data.csv");
 		exchange.setInput(argv[1]);
-
-		std::cout << "Data file: " << exchange.getFileData() << std::endl;
-		std::cout << "Input file: " << exchange.getFileInput() << std::endl;
+		exchange.readFileInput();
 	}
 	catch (const std::exception &e)
 	{

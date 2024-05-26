@@ -41,6 +41,15 @@ void BitcoinExchange::setInput(std::string const &input)
 	this->_input = input;
 }
 
+std::string trim(std::string const &str)
+{
+	std::string word;
+	std::stringstream stream(str);
+	stream >> word;
+
+	return word;
+}
+
 void BitcoinExchange::setFileData(void)
 {
 	std::ifstream file(this->_data.c_str());
@@ -56,13 +65,52 @@ void BitcoinExchange::setFileData(void)
 		if (line.find(',') == std::string::npos)
 			throw BitcoinExchange::DataFileErrorException();
 
-		key = line.substr(0, line.find(','));
+		key = trim(line.substr(0, line.find(',')));
 		if (key != "date" && !this->chkFmtDate(key))
 			throw BitcoinExchange::DataFileErrorException();
 
 		std::stringstream ss(line.substr(line.find(',') + 1));
 		ss >> value;
 		this->_dataMap.insert(std::pair<std::string, double>(key, value));
+	}
+
+	file.close();
+}
+
+void BitcoinExchange::readFileInput(void)
+{
+	std::ifstream file(this->_input.c_str());
+	std::string line;
+	std::string date;
+	int coin;
+
+	if (!file.is_open())
+		throw BitcoinExchange::InputFileCouldNotOpenException();
+
+	while (std::getline(file, line))
+	{
+		try
+		{
+			if (line.find('|') == std::string::npos)
+				throw BitcoinExchange::BadInputException("bad input => " + line);
+
+			date = trim(line.substr(0, line.find('|')));
+			if (date != "date" && !this->chkFmtDate(date))
+				throw BitcoinExchange::BadInputException("bad input => " + line);
+
+			std::stringstream ss(line.substr(line.find('|') + 1));
+			ss >> coin;
+			if (coin < 0)
+				throw BitcoinExchange::NotPositiveException();
+			else if (coin > 1000)
+				throw BitcoinExchange::LargeNumberException();
+
+			std::cout << date << " => " << coin << " = " << this->_dataMap[date] * coin << std::endl;
+		}
+		catch (const std::exception &e)
+		{
+			std::cout << "Error: " << e.what() << std::endl;
+		}
 	}
 
 	file.close();
@@ -97,4 +145,19 @@ const char *BitcoinExchange::InputFileCouldNotOpenException::what() const throw(
 const char *BitcoinExchange::DataFileErrorException::what() const throw()
 {
 	return ("file data.csv error");
+}
+
+const char *BitcoinExchange::BadInputException::what() const throw()
+{
+	return this->_msg.c_str();
+}
+
+const char *BitcoinExchange::NotPositiveException::what() const throw()
+{
+	return ("not a positive number.");
+}
+
+const char *BitcoinExchange::LargeNumberException::what() const throw()
+{
+	return ("too large a number.");
 }

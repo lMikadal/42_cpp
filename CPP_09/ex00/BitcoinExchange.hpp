@@ -22,9 +22,10 @@ public:
 
 	std::string getFileData(void) const;
 	std::string getFileInput(void) const;
-	void setInput(std::string const &input);
+	void setInput(std::string const &);
 	void setFileData(void);
-	bool chkFmtDate(std::string const &key) const;
+	void readFileInput(void);
+	bool chkFmtDate(std::string const &) const;
 
 	class InputFileCouldNotOpenException : public std::exception
 	{
@@ -33,6 +34,29 @@ public:
 	};
 
 	class DataFileErrorException : public std::exception
+	{
+	public:
+		virtual const char *what() const throw();
+	};
+
+	class BadInputException : public std::exception
+	{
+	private:
+		std::string _msg;
+
+	public:
+		BadInputException(std::string const &err) throw() : _msg(err){};
+		virtual ~BadInputException() throw(){};
+		virtual const char *what() const throw();
+	};
+
+	class NotPositiveException : public std::exception
+	{
+	public:
+		virtual const char *what() const throw();
+	};
+
+	class LargeNumberException : public std::exception
 	{
 	public:
 		virtual const char *what() const throw();
