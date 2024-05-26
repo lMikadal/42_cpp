@@ -12,6 +12,10 @@ private:
 	std::string _data;
 	std::string _input;
 	std::map<std::string, double> _dataMap;
+	std::string trim(std::string const &);
+	int strToInt(std::string const &) const;
+	std::string intToString(const int &) const;
+	double getExchangeRate(std::string const &) const;
 
 public:
 	BitcoinExchange();
