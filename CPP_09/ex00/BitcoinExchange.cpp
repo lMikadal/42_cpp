@@ -10,7 +10,10 @@ BitcoinExchange::BitcoinExchange(std::string const &name) : _data(name)
 	this->setFileData();
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &b) : _data(b._data), _input(b._input), _dataMap(b._dataMap) {}
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &b)
+{
+	*this = b;
+}
 
 BitcoinExchange::~BitcoinExchange() {}
 
