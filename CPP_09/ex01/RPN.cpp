@@ -41,7 +41,7 @@ void RPN::cal(char op, std::stack<int> &stack)
 int RPN::calculate(std::string str)
 {
 	std::stack<int> stack;
-	std::string ::iterator it = str.begin();
+	std::string::iterator it = str.begin();
 
 	while (it != str.end())
 	{
