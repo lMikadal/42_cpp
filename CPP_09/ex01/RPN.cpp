@@ -33,7 +33,11 @@ void RPN::cal(char op, std::stack<int> &stack)
 	else if (op == '*')
 		_result = _first * _second;
 	else if (op == '/')
+	{
+		if (_second == 0)
+			throw ErrorException();
 		_result = _first / _second;
+	}
 
 	stack.push(_result);
 }
