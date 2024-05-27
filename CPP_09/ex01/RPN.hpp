@@ -7,14 +7,15 @@
 class RPN
 {
 private:
-	std::stack<int> _stack;
-	int _first, _second, _result;
+	void static cal(char op, std::stack<int> &stack);
 
 public:
 	RPN();
 	RPN(const RPN &);
 	~RPN();
 	RPN &operator=(const RPN &);
+
+	int static calculate(std::string str);
 
 	class ErrorException : public std::exception
 	{
