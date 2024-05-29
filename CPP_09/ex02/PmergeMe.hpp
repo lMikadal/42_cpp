@@ -7,13 +7,18 @@
 
 class PmergeMe
 {
+private:
+	int _n;
+	std::vector<int> _v;
+	std::list<int> _l;
+
 public:
 	PmergeMe();
 	PmergeMe(const PmergeMe &);
 	~PmergeMe();
 	PmergeMe &operator=(const PmergeMe &);
 
-	void static chk_arg(int argc, char **argv);
+	void chk_arg(int argc, char **argv);
 
 	class InvalidArgvException : public std::exception
 	{

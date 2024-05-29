@@ -7,7 +7,9 @@ int main(int argc, char **argv)
 		if (argc == 1)
 			throw PmergeMe::InvalidArgvException();
 
-		PmergeMe::chk_arg(argc, argv);
+		PmergeMe pmergeMe;
+
+		pmergeMe.chk_arg(argc, argv);
 	}
 	catch (const std::exception &e)
 	{
