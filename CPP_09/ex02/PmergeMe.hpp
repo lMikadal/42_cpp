@@ -2,8 +2,6 @@
 #define PMERGEME_HPP
 
 #include <iostream>
-#include <cmath>
-#include <algorithm>
 #include <vector>
 #include <list>
 
