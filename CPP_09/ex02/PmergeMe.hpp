@@ -2,6 +2,8 @@
 #define PMERGEME_HPP
 
 #include <iostream>
+#include <cmath>
+#include <algorithm>
 #include <vector>
 #include <list>
 
@@ -12,6 +14,9 @@ private:
 	std::vector<int> _v;
 	std::list<int> _l;
 
+	void v_merge_sort(std::vector<int> &v);
+	void l_merge_sort(std::list<int> &l);
+
 public:
 	PmergeMe();
 	PmergeMe(const PmergeMe &);
@@ -19,6 +24,7 @@ public:
 	PmergeMe &operator=(const PmergeMe &);
 
 	void chk_arg(int argc, char **argv);
+	void exec();
 
 	class InvalidArgvException : public std::exception
 	{

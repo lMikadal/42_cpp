@@ -10,6 +10,7 @@ int main(int argc, char **argv)
 		PmergeMe pmergeMe;
 
 		pmergeMe.chk_arg(argc, argv);
+		pmergeMe.exec();
 	}
 	catch (const std::exception &e)
 	{
