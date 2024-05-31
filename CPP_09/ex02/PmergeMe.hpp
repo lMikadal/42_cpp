@@ -13,6 +13,8 @@ private:
 	std::vector<int> _v;
 	std::list<int> _l;
 
+	void print_detail(int n, std::string type, int time);
+
 public:
 	PmergeMe();
 	PmergeMe(const PmergeMe &);
@@ -28,6 +30,17 @@ public:
 		virtual const char *what() const throw();
 	};
 };
+
+template <typename T>
+void print_list(T &list, std::string str)
+{
+	std::cout << str;
+
+	for (typename T::iterator it = list.begin(); it != list.end(); it++)
+		std::cout << *it << " ";
+
+	std::cout << std::endl;
+}
 
 template <typename T>
 void insert(T &f, T &tmp)

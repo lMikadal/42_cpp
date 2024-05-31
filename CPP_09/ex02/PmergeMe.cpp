@@ -46,6 +46,11 @@ void PmergeMe::chk_arg(int argc, char **argv)
 	this->_n = argc - 1;
 }
 
+void PmergeMe::print_detail(int n, std::string type, int time)
+{
+	std::cout << "Time to process a range of " << n << " elements with std::" << type << " : " << time << "us" << std::endl;
+}
+
 void PmergeMe::exec()
 {
 	std::vector<int> begin = this->_v;
@@ -53,20 +58,10 @@ void PmergeMe::exec()
 	merge_insert_sort(this->_v);
 	merge_insert_sort(this->_l);
 
-	std::cout << "Before: ";
-	for (int i = 0; i < this->_n; i++)
-		std::cout << begin[i] << " ";
-	std::cout << std::endl;
-
-	std::cout << "After vector: ";
-	for (int i = 0; i < this->_n; i++)
-		std::cout << this->_v[i] << " ";
-	std::cout << std::endl;
-
-	std::cout << "After list: ";
-	for (std::list<int>::iterator it = this->_l.begin(); it != this->_l.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
+	print_list(begin, "Before: ");
+	print_list(this->_v, "After:  ");
+	print_detail(this->_n, "vector<int>", 0);
+	print_detail(this->_n, "list<int>", 0);
 }
 
 const char *PmergeMe::ErrorException::what() const throw()
