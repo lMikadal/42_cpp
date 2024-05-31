@@ -12,8 +12,8 @@ private:
 	std::vector<int> _v;
 	std::list<int> _l;
 
-	void v_merge_sort(std::vector<int> &v);
-	void l_merge_sort(std::list<int> &l);
+	void v_merge_insert_sort(std::vector<int> &v);
+	void l_merge_insert_sort(std::list<int> &l);
 
 public:
 	PmergeMe();
@@ -24,7 +24,7 @@ public:
 	void chk_arg(int argc, char **argv);
 	void exec();
 
-	class InvalidArgvException : public std::exception
+	class ErrorException : public std::exception
 	{
 	public:
 		virtual const char *what() const throw();
