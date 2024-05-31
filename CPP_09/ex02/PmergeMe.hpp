@@ -13,10 +13,13 @@ private:
 	std::vector<int> _v;
 	std::list<int> _l;
 
-	void v_merge_insert_sort(std::vector<int> &v);
-	void v_insert(std::vector<int> &f, std::vector<int> &tmp);
-	std::vector<int> v_insert_sort(std::vector<int> &l, std::vector<int> &r);
-	void l_merge_insert_sort(std::list<int> &l);
+	void v_merge_insert_sort(std::vector<int> &);
+	void v_insert(std::vector<int> &, std::vector<int> &);
+	std::vector<int> v_insert_sort(std::vector<int> &, std::vector<int> &);
+
+	void l_merge_insert_sort(std::list<int> &);
+	void l_insert(std::list<int> &, std::list<int> &);
+	std::list<int> l_insert_sort(std::list<int> &, std::list<int> &);
 
 public:
 	PmergeMe();

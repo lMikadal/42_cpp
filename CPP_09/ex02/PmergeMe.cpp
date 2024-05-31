@@ -67,9 +67,14 @@ void PmergeMe::exec()
 		std::cout << begin[i] << " ";
 	std::cout << std::endl;
 
-	std::cout << "After: ";
+	std::cout << "After vector: ";
 	for (int i = 0; i < this->_n; i++)
 		std::cout << this->_v[i] << " ";
+	std::cout << std::endl;
+
+	std::cout << "After list: ";
+	for (std::list<int>::iterator it = this->_l.begin(); it != this->_l.end(); it++)
+		std::cout << *it << " ";
 	std::cout << std::endl;
 }
 
@@ -90,16 +95,16 @@ void PmergeMe::v_merge_insert_sort(std::vector<int> &v)
 void PmergeMe::v_insert(std::vector<int> &f, std::vector<int> &tmp)
 {
 	int i;
-	std::vector<int>::iterator b;
+	std::vector<int>::iterator it;
 
 	while (f.size() > 0)
 	{
 		i = 0;
-		for (b = tmp.begin(); b < tmp.end(); b++)
+		for (it = tmp.begin(); it != tmp.end(); it++)
 		{
-			if (tmp[i] > f[0])
+			if (*it > f.front())
 			{
-				tmp.insert(tmp.begin() + i, f[0]);
+				tmp.insert(it, f.front());
 				f.erase(f.begin());
 				break;
 			}
@@ -108,7 +113,7 @@ void PmergeMe::v_insert(std::vector<int> &f, std::vector<int> &tmp)
 
 		if (i == (int)tmp.size())
 		{
-			tmp.push_back(f[0]);
+			tmp.push_back(f.front());
 			f.erase(f.begin());
 		}
 	}
@@ -120,12 +125,12 @@ std::vector<int> PmergeMe::v_insert_sort(std::vector<int> &l, std::vector<int> &
 
 	if (l.size() > 0)
 	{
-		tmp.push_back(l[0]);
+		tmp.push_back(l.front());
 		l.erase(l.begin());
 	}
 	else
 	{
-		tmp.push_back(r[0]);
+		tmp.push_back(r.front());
 		r.erase(r.begin());
 	}
 
@@ -150,6 +155,56 @@ void PmergeMe::l_merge_insert_sort(std::list<int> &l)
 
 	l_merge_insert_sort(left);
 	l_merge_insert_sort(right);
+
+	l = this->l_insert_sort(left, right);
+}
+
+void PmergeMe::l_insert(std::list<int> &f, std::list<int> &tmp)
+{
+	int i;
+	std::list<int>::iterator it;
+
+	while (f.size() > 0)
+	{
+		i = 0;
+		for (it = tmp.begin(); it != tmp.end(); it++)
+		{
+			if (*it > f.front())
+			{
+				tmp.insert(it, f.front());
+				f.erase(f.begin());
+				break;
+			}
+			i++;
+		}
+
+		if (i == (int)tmp.size())
+		{
+			tmp.push_back(f.front());
+			f.erase(f.begin());
+		}
+	}
+}
+
+std::list<int> PmergeMe::l_insert_sort(std::list<int> &l, std::list<int> &r)
+{
+	std::list<int> tmp;
+
+	if (l.size() > 0)
+	{
+		tmp.push_back(l.front());
+		l.erase(l.begin());
+	}
+	else
+	{
+		tmp.push_back(r.front());
+		r.erase(r.begin());
+	}
+
+	this->l_insert(l, tmp);
+	this->l_insert(r, tmp);
+
+	return tmp;
 }
 
 const char *PmergeMe::ErrorException::what() const throw()
