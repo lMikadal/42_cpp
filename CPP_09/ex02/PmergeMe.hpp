@@ -5,6 +5,7 @@
 #include <sstream>
 #include <vector>
 #include <list>
+#include <ctime>
 
 class PmergeMe
 {
@@ -13,7 +14,7 @@ private:
 	std::vector<int> _v;
 	std::list<int> _l;
 
-	void print_detail(int n, std::string type, int time);
+	void print_detail(int, std::string, double);
 
 public:
 	PmergeMe();

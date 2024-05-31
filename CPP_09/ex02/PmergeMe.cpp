@@ -46,22 +46,24 @@ void PmergeMe::chk_arg(int argc, char **argv)
 	this->_n = argc - 1;
 }
 
-void PmergeMe::print_detail(int n, std::string type, int time)
+void PmergeMe::print_detail(int n, std::string type, double time)
 {
-	std::cout << "Time to process a range of " << n << " elements with std::" << type << " : " << time << "us" << std::endl;
+	std::cout << "Time to process a range of " << n << " elements with std::" << type << " : " << time << " us" << std::endl;
 }
 
 void PmergeMe::exec()
 {
 	std::vector<int> begin = this->_v;
 
+	clock_t begin_time_v = clock();
 	merge_insert_sort(this->_v);
+	clock_t begin_time_l = clock();
 	merge_insert_sort(this->_l);
 
 	print_list(begin, "Before: ");
 	print_list(this->_v, "After:  ");
-	print_detail(this->_n, "vector<int>", 0);
-	print_detail(this->_n, "list<int>", 0);
+	print_detail(this->_n, "vector<int>", (double(clock() - begin_time_v) / CLOCKS_PER_SEC) * 1000000);
+	print_detail(this->_n, "list<int>  ", (double(clock() - begin_time_l) / CLOCKS_PER_SEC) * 1000000);
 }
 
 const char *PmergeMe::ErrorException::what() const throw()
