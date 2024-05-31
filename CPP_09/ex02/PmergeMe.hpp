@@ -2,6 +2,7 @@
 #define PMERGEME_HPP
 
 #include <iostream>
+#include <sstream>
 #include <vector>
 #include <list>
 
@@ -13,6 +14,8 @@ private:
 	std::list<int> _l;
 
 	void v_merge_insert_sort(std::vector<int> &v);
+	void v_insert(std::vector<int> &f, std::vector<int> &tmp);
+	std::vector<int> v_insert_sort(std::vector<int> &l, std::vector<int> &r);
 	void l_merge_insert_sort(std::list<int> &l);
 
 public:
