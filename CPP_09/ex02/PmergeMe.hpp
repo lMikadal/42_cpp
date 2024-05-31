@@ -13,14 +13,6 @@ private:
 	std::vector<int> _v;
 	std::list<int> _l;
 
-	void v_merge_insert_sort(std::vector<int> &);
-	void v_insert(std::vector<int> &, std::vector<int> &);
-	std::vector<int> v_insert_sort(std::vector<int> &, std::vector<int> &);
-
-	void l_merge_insert_sort(std::list<int> &);
-	void l_insert(std::list<int> &, std::list<int> &);
-	std::list<int> l_insert_sort(std::list<int> &, std::list<int> &);
-
 public:
 	PmergeMe();
 	PmergeMe(const PmergeMe &);
@@ -36,5 +28,74 @@ public:
 		virtual const char *what() const throw();
 	};
 };
+
+template <typename T>
+void insert(T &f, T &tmp)
+{
+	int i;
+
+	while (f.size() > 0)
+	{
+		i = 0;
+		for (typename T::iterator it = tmp.begin(); it != tmp.end(); it++)
+		{
+			if (*it > f.front())
+			{
+				tmp.insert(it, f.front());
+				f.erase(f.begin());
+				break;
+			}
+			i++;
+		}
+
+		if (i == (int)tmp.size())
+		{
+			tmp.push_back(f.front());
+			f.erase(f.begin());
+		}
+	}
+}
+
+template <typename T>
+T insert_sort(T &l, T &r)
+{
+	T tmp;
+
+	if (l.size() > 0)
+	{
+		tmp.push_back(l.front());
+		l.erase(l.begin());
+	}
+	else
+	{
+		tmp.push_back(r.front());
+		r.erase(r.begin());
+	}
+
+	insert(l, tmp);
+	insert(r, tmp);
+
+	return tmp;
+}
+
+template <typename T>
+void merge_insert_sort(T &data)
+{
+	if (data.size() <= 2)
+		return;
+
+	T left, right;
+	typename T::iterator it = data.begin();
+
+	for (int i = 0; i < (int)(data.size() / 2); i++)
+		left.push_back(*it++);
+	for (int i = (data.size() / 2); i < (int)data.size(); i++)
+		right.push_back(*it++);
+
+	merge_insert_sort(left);
+	merge_insert_sort(right);
+
+	data = insert_sort(left, right);
+}
 
 #endif
